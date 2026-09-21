@@ -1,0 +1,420 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    background-image: url("home/black.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #f5f2e9;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* PAGE 1 */
+
+.bag-page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+h1 {
+    /* clamp keeps the title responsive without getting too small or too large */
+    font-size: clamp(55px, 7vw, 110px);
+    line-height: 0.88;
+    letter-spacing: -4px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.subtitle {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    font-style: italic;
+    opacity: 0.7;
+    margin-bottom: 65px;
+}
+
+.zipper-area {
+    /* relative lets the zipper pull move inside this area */
+    position: relative;
+    width: 85%;
+    max-width: 1200px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zipper-track {
+    width: 100%;
+    height: 55px;
+    object-fit: fill;
+    display: block;
+}
+
+.zipper-pull {
+    /* absolute lets JS change the left position while dragging */
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100px;
+    height: auto;
+    transform: translate(-25%, -50%);
+    cursor: grab;
+    z-index: 2;
+}
+
+.zipper-pull:active {
+    cursor: grabbing;
+}
+
+.instruction {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    opacity: 0.65;
+}
+
+
+/* PAGE 2 */
+
+.material-page {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url("home/black.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.drag-instruction {
+    /* keeps the instruction centered above the pile */
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: #f5f2e9;
+    opacity: 0.7;
+    z-index: 50;
+}
+.why-button {
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+    padding: 18px 28px;
+    background: #f5f2e9;
+    color: #111;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border: 2px solid #111;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.why-button:hover {
+    background: #111;
+    color: #f5f2e9;
+}
+
+.bag-mess {
+    /* this is the full area the objects can be dragged around */
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.bag-item {
+    /* each object can overlap and move freely instead of staying in the grid */
+    position: absolute;
+    object-fit: contain;
+    cursor: grab;
+    user-select: none;
+    z-index: 5;
+}
+
+.bag-item:active {
+    cursor: grabbing;
+}
+
+
+
+/* different positions and rotations make the objects look like a messy pile */
+
+.receipt {
+    width: 250px;
+    left: 41%;
+    top: 23%;
+    transform: rotate(-20deg);
+    z-index: 2;
+}
+
+.keys {
+    width: 330px;
+    left: 42%;
+    top: 25%;
+    transform: rotate(18deg);
+    z-index: 3;
+}
+
+.mirror {
+    width: 290px;
+    left: 48%;
+    top: 24%;
+    transform: rotate(9deg);
+    z-index: 4;
+}
+
+.polaroid {
+    width: 180px;
+    left: 51%;
+    top: 29%;
+    transform: rotate(-14deg);
+    z-index: 6;
+}
+
+.matchbox {
+    width: 180px;
+    left: 39%;
+    top: 44%;
+    transform: rotate(17deg);
+    z-index: 7;
+}
+
+.cap {
+    width: 350px;
+    left: 47%;
+    top: 42%;
+    transform: rotate(-12deg);
+    z-index: 5;
+}
+
+.airpods {
+    width: 250px;
+    left: 43%;
+    top: 37%;
+    transform: rotate(-5deg);
+    z-index: 8;
+}
+
+.lays {
+    width: 340px;
+    left: 36%;
+    top: 37%;
+    transform: rotate(13deg);
+    z-index: 4;
+}
+
+.scrunchy {
+    width: 290px;
+    left: 44%;
+    top: 46%;
+    transform: rotate(-17deg);
+    z-index: 9;
+}
+
+.perfume {
+    width: 110px;
+    left: 53%;
+    top: 43%;
+    transform: rotate(10deg);
+    z-index: 10;
+}
+
+.omny {
+    width: 160px;
+    left: 49%;
+    top: 34%;
+    transform: rotate(-18deg);
+    z-index: 11;
+}
+
+.why-button {
+    /* low z-index hides the button underneath the object pile */
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+    padding: 18px 28px;
+    background: #f5f2e9;
+    color: #111;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border: 2px solid #111;
+    z-index: 1;
+}
+
+
+/* PAGE 3 */
+
+.memory-page {
+    min-height: 100vh;
+    height: auto;
+
+    /* page 3 needs scrolling because all the cards do not fit on one screen */
+    overflow-y: auto;
+
+    background-image: url("home/black.jpg");
+    background-size: cover;
+    background-position: center;
+
+    /* keeps the fabric background still while scrolling through cards */
+    background-attachment: fixed;
+
+    padding: 60px 40px;
+}
+
+.memory-grid {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+
+    /* wraps the cards onto new rows depending on screen width */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.memory-card {
+    width: 220px;
+    height: 290px;
+
+    /* gives the flip a 3D feeling instead of looking flat */
+    perspective: 1000px;
+
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    /* makes the flip smooth */
+    transition: transform 0.6s;
+
+    /* keeps the front and back in the same 3D space */
+    transform-style: preserve-3d;
+}
+
+
+/* JS adds the flipped class when the card is clicked */
+.memory-card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    /* puts both sides directly on top of each other */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    /* stops the reversed side from showing through */
+    backface-visibility: hidden;
+
+    background-color: #f4f0e7;
+    padding: 15px;
+    color: #111;
+    box-shadow: 4px 5px 12px rgba(0, 0, 0, 0.35);
+}
+
+.card-front {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-front img {
+    width: 100%;
+    height: 215px;
+    object-fit: contain;
+}
+
+.card-front p {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-style: italic;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+.card-back {
+    /* starts the back already facing the opposite direction */
+    transform: rotateY(180deg);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+}
+
+.card-back h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.card-back p {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+
+/* adjusts sizes on smaller screens */
+
+@media (max-width: 700px) {
+
+    .memory-page {
+        padding: 40px 20px;
+    }
+
+    .memory-grid {
+        gap: 25px;
+    }
+
+    .memory-card {
+        width: 190px;
+        height: 260px;
+    }
+
+    .card-front img {
+        height: 185px;
+    }
+
+}
